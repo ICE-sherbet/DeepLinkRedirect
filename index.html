@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>リダイレクトページ</title>
+  <script>
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      const redirectUrl = params.get('url');
+      if (redirectUrl) {
+        // ハイパーリンクの更新（テキストはリンク先のアドレス）
+        const linkElem = document.getElementById('redirectLink');
+        linkElem.href = redirectUrl;
+        linkElem.textContent = redirectUrl;
+        // 自動リダイレクトを実行
+        window.location.href = redirectUrl;
+      } else {
+        document.getElementById('message').textContent = 'リダイレクトするURLが指定されていません。';
+        document.getElementById('redirectLink').style.display = 'none';
+      }
+    };
+  </script>
+</head>
+<body>
+  <p id="message">
+このページはディープリンク経由で Unity エディターを開きます。<br>
+このコマンドは、最後にアクティブだったエディターに送信されます:
+  </p>
+  <p>
+    <a id="redirectLink" href="#">リンク先</a>
+  </p>
+</body>
+</html>
